@@ -1,4 +1,5 @@
-import { View, StyleSheet } from 'react-native'
+import React from 'react'
+import { StyleSheet, SafeAreaView, Platform } from 'react-native'
 import Keyboard from './components/keyboard'
 import WordGrid from './components/word-grid'
 
@@ -7,15 +8,19 @@ export default function App() {
   // update the state variable on onPress
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <WordGrid wordsEntered={[]} />
       <Keyboard onPress={() => {}} />
-    </View>
+    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: Platform.OS === 'android' ? 20 : 0,
+    backgroundColor: 'black',
   },
 })

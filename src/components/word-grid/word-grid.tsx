@@ -1,10 +1,27 @@
-import { StyleProp, View, ViewStyle } from 'react-native'
+import React from 'react'
+import { View, StyleSheet } from 'react-native'
+import GridRow from '../grid-row'
 
 type WordGridProps = {
   wordsEntered: string[][]
-  style?: StyleProp<ViewStyle>
 }
 
-export default function WordGrid({ style }: WordGridProps) {
-  return <View style={style} />
+export default function WordGrid({ wordsEntered }: WordGridProps) {
+  return (
+    <View style={styles.gridRows}>
+      <GridRow />
+      <GridRow />
+      <GridRow />
+      <GridRow />
+      <GridRow />
+      <GridRow />
+    </View>
+  )
 }
+
+const styles = StyleSheet.create({
+  gridRows: {
+    flex: 4,
+    justifyContent: 'center',
+  },
+})
