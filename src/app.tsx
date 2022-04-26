@@ -6,11 +6,13 @@ import WordGrid from './components/word-grid'
 export default function App() {
   // @TODO: Add a state variable to track the words entered
   // update the state variable on onPress
-
+  const handlePress = (letter: string) => {
+    console.log(letter)
+  }
   return (
     <SafeAreaView style={styles.container}>
       <WordGrid wordsEntered={[]} />
-      <Keyboard onPress={() => {}} />
+      <Keyboard onKeyPress={handlePress} />
     </SafeAreaView>
   )
 }

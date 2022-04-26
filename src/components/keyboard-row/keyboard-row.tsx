@@ -1,17 +1,19 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
 type KeyboardRowProps = {
   keyboardRow: string[]
+  onKeyPress: (letter: string) => void
 }
-export function KeyboardRow({ keyboardRow }: KeyboardRowProps) {
+
+export function KeyboardRow({ keyboardRow, onKeyPress }: KeyboardRowProps) {
   return (
     <View style={styles.keyboardRow}>
       {keyboardRow.map((letter: string) => {
         return (
-          <View key={letter} style={styles.key}>
+          <TouchableOpacity onPress={() => onKeyPress(letter)} key={letter} style={styles.key}>
             <Text style={styles.letter}>{letter}</Text>
-          </View>
+          </TouchableOpacity>
         )
       })}
     </View>
