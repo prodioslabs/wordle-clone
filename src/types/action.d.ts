@@ -11,4 +11,6 @@ type EnterAction = {
   type: 'enter'
 }
 
+type WordMap = { [key: number]: string }
+
 type Action = DeleteAction | InsertAction | EnterAction

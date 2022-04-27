@@ -10,7 +10,7 @@ type KeyboardProps = {
 export default function Keyboard({ onKeyPress }: KeyboardProps) {
   const keyboardRow1 = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P']
   const keyboardRow2 = ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L']
-  const keyboardRow3 = ['Z', 'X', 'C', 'V', 'B', 'N', 'M', '⌫']
+  const keyboardRow3 = ['Enter', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '⌫']
   return (
     <View style={styles.keyboard}>
       <KeyboardRow keyboardRow={keyboardRow1} onKeyPress={onKeyPress} />

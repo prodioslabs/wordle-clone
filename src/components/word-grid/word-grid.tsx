@@ -3,18 +3,19 @@ import { View, StyleSheet } from 'react-native'
 import GridRow from '../grid-row'
 
 type WordGridProps = {
-  wordsEntered: string[][]
+  wordMap: WordMap
+  currentRow: number
 }
 
-export default function WordGrid({ wordsEntered }: WordGridProps) {
+export default function WordGrid({ wordMap }: WordGridProps) {
   return (
     <View style={styles.gridRows}>
-      <GridRow />
-      <GridRow />
-      <GridRow />
-      <GridRow />
-      <GridRow />
-      <GridRow />
+      <GridRow word={wordMap[0]} />
+      <GridRow word={wordMap[1]} />
+      <GridRow word={wordMap[2]} />
+      <GridRow word={wordMap[3]} />
+      <GridRow word={wordMap[4]} />
+      <GridRow word={wordMap[5]} />
     </View>
   )
 }

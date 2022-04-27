@@ -13,7 +13,7 @@ export default function WordCell({ letter }: WordCellProps) {
 }
 
 const styles = StyleSheet.create({
-  wordCell: { borderWidth: 2, margin: 2, borderColor: '#4D5D53', padding: 5, width: 50 },
+  wordCell: { borderWidth: 2, margin: 2, borderColor: '#4D5D53', padding: 5, width: 50, height: 50 },
   letter: {
     textAlign: 'center',
     color: '#FFFFFF',
