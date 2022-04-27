@@ -10,7 +10,7 @@ export default function App() {
   const [currentWordLength, setCurrentWordLength] = useState(0)
 
   const wordToGuess = sampleWord.toUpperCase()
-
+  console.log(wordToGuess)
   const handlePress = (letter: string) => {
     if (letter === 'Enter') {
       if (currentWordLength < 5) {
@@ -19,7 +19,8 @@ export default function App() {
       }
 
       if (wordMap[currentRow] === wordToGuess) {
-        alert('win win win')
+        alert('You Won!!! :) ')
+        setCurrentRow(currentRow + 1)
         return
       }
 
@@ -28,7 +29,7 @@ export default function App() {
           alert('Word does not exists in our dictionary')
           return
         } else {
-          alert(`you loose :( You still have ${4 - currentRow}`)
+          alert(`you loose :( You still have ${5 - currentRow} chances`)
         }
 
         setCurrentRow(currentRow + 1)
@@ -50,7 +51,7 @@ export default function App() {
   }, [currentRow, currentWordLength, wordMap])
   return (
     <SafeAreaView style={styles.container}>
-      <WordGrid wordMap={wordMap} currentRow={currentRow} />
+      <WordGrid wordMap={wordMap} currentRow={currentRow} wordToGuess={wordToGuess} />
       <Keyboard onKeyPress={handlePress} />
     </SafeAreaView>
   )
