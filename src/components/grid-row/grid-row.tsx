@@ -10,6 +10,8 @@ type GridRowProp = {
 export default function GridRow({ word, isGuessed, wordToGuess }: GridRowProp) {
   const wordArray = word?.split('')
 
+  // @TODO: Move wordToGuess to context, as it is used in many components
+  // and we want to prevent prop-drilling
   return (
     <View style={styles.gridRow}>
       <WordCell letter={wordArray?.[0]} isGuessed={isGuessed} wordToGuess={wordToGuess} index={0} />

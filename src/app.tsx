@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { StyleSheet, SafeAreaView, Platform } from 'react-native'
 import Keyboard from './components/keyboard'
 import WordGrid from './components/word-grid'
@@ -7,48 +7,44 @@ import { wordsToGuess, sampleWord } from './utils/word-to-guess'
 export default function App() {
   const [currentRow, setCurrentRow] = useState(0)
   const [wordMap, setWordMap] = useState<WordMap>({ 0: '', 1: '', 2: '', 3: '', 4: '', 5: '' })
-  const [currentWordLength, setCurrentWordLength] = useState(0)
 
   const wordToGuess = sampleWord.toUpperCase()
-  console.log(wordToGuess)
-  const handlePress = (letter: string) => {
-    if (letter === 'Enter') {
-      if (currentWordLength < 5) {
-        alert('Not enough letters')
-        return
-      }
 
-      if (wordMap[currentRow] === wordToGuess) {
-        alert('You Won!!! :) ')
-        setCurrentRow(currentRow + 1)
-        return
-      }
+  const handlePress = useCallback(
+    (letter: string) => {
+      const currentWordLength = wordMap[currentRow].length
 
-      if (currentWordLength === 5) {
-        if (!wordsToGuess.includes(wordMap[currentRow].toLowerCase())) {
-          alert('Word does not exists in our dictionary')
-          return
-        } else {
-          alert(`you loose :( You still have ${5 - currentRow} chances`)
+      switch (letter) {
+        case 'Enter': {
+          if (currentWordLength < 5) {
+            return alert('Not enough letters')
+          }
+
+          const isCorrect = wordMap[currentRow] === wordToGuess
+          if (isCorrect) {
+            return alert('You Won!!! :) ')
+          }
+
+          const isWordValid = wordsToGuess.includes(wordMap[currentRow].toLowerCase())
+          if (!isWordValid) {
+            alert('Word does not exists in our dictionary')
+          }
+
+          return setCurrentRow((prevState) => prevState + 1)
         }
 
-        setCurrentRow(currentRow + 1)
-        return
+        case '⌫': {
+          return setWordMap((prevWordMap) => ({ ...prevWordMap, [currentRow]: wordMap[currentRow].slice(0, -1) }))
+        }
+
+        default: {
+          return setWordMap((prevWordMap) => ({ ...prevWordMap, [currentRow]: prevWordMap[currentRow] + letter }))
+        }
       }
-    }
+    },
+    [currentRow, wordMap, wordToGuess],
+  )
 
-    if (letter === '⌫') {
-      const modifiedWord = wordMap[currentRow].slice(0, -1)
-      setWordMap({ ...wordMap, [currentRow]: modifiedWord })
-      return
-    }
-
-    if (currentWordLength <= 4) setWordMap({ ...wordMap, [currentRow]: wordMap[currentRow] + letter })
-  }
-
-  useEffect(() => {
-    setCurrentWordLength(wordMap[currentRow].length)
-  }, [currentRow, currentWordLength, wordMap])
   return (
     <SafeAreaView style={styles.container}>
       <WordGrid wordMap={wordMap} currentRow={currentRow} wordToGuess={wordToGuess} />
